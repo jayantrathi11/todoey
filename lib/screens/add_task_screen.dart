@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_list/module/task.dart';
 
-class AddTaskScreen extends StatefulWidget {
-  const AddTaskScreen({Key? key}) : super(key: key);
-
-  @override
-  _AddTaskScreenState createState() => _AddTaskScreenState();
-}
-
-class _AddTaskScreenState extends State<AddTaskScreen> {
+class AddTaskScreen extends StatelessWidget {
+  late final Function func;
+  AddTaskScreen({required this.func});
+  late String newToDo;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +38,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
-              onChanged: (String? ans) {},
+              onChanged: (String ans) {
+                newToDo = ans;
+              },
             ),
             const SizedBox(
               height: 30,
@@ -49,7 +48,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             Container(
               color: Colors.lightBlueAccent,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  func(newToDo);
+                },
                 child: const Text(
                   'Add Task',
                   style: TextStyle(

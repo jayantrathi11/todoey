@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_list/widgets/task_list.dart';
 import 'package:todoey_list/screens/add_task_screen.dart';
+import 'package:todoey_list/module/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
   late String value;
+
   late TextEditingController controller;
+
+  List<Task> task = [];
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +22,16 @@ class TasksScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (BuildContext context) => AddTaskScreen(),
+            builder: (BuildContext context) => AddTaskScreen(
+              func: (newTaskTitle) {
+                setState(
+                  () {
+                    task.add(Task(name: newTaskTitle));
+                  },
+                );
+                Navigator.pop(context);
+              },
+            ),
           );
         },
         backgroundColor: Colors.lightBlueAccent,
@@ -60,9 +78,9 @@ class TasksScreen extends StatelessWidget {
               left: 40,
               bottom: 30,
             ),
-            child: const Text(
-              "12 Tasks",
-              style: TextStyle(
+            child: Text(
+              "${task.length} Tasks",
+              style: const TextStyle(
                 fontSize: 20,
                 color: Colors.white,
                 fontWeight: FontWeight.w300,
@@ -74,7 +92,9 @@ class TasksScreen extends StatelessWidget {
               padding: const EdgeInsets.only(
                 left: 30,
               ),
-              child: const TasksList(),
+              child: TasksList(
+                task: task,
+              ),
               width: double.infinity,
               height: double.minPositive,
               decoration: const BoxDecoration(
