@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_list/task_data.dart';
 import 'package:todoey_list/widgets/task_list.dart';
 import 'package:todoey_list/screens/add_task_screen.dart';
-import 'package:todoey_list/module/task.dart';
+import 'package:todoey_list/module/basic_task.dart';
+import 'package:provider/provider.dart';
 
 class TasksScreen extends StatefulWidget {
   @override
@@ -12,8 +14,6 @@ class _TasksScreenState extends State<TasksScreen> {
   late String value;
 
   late TextEditingController controller;
-
-  List<Task> task = [];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,9 @@ class _TasksScreenState extends State<TasksScreen> {
               func: (newTaskTitle) {
                 setState(
                   () {
-                    task.add(Task(name: newTaskTitle));
+                    Provider.of<TaskData>(context)
+                        .task
+                        .add(Task(name: newTaskTitle));
                   },
                 );
                 Navigator.pop(context);
@@ -79,7 +81,7 @@ class _TasksScreenState extends State<TasksScreen> {
               bottom: 30,
             ),
             child: Text(
-              "${task.length} Tasks",
+              "${Provider.of<TaskData>(context).count} Tasks",
               style: const TextStyle(
                 fontSize: 20,
                 color: Colors.white,
@@ -92,9 +94,7 @@ class _TasksScreenState extends State<TasksScreen> {
               padding: const EdgeInsets.only(
                 left: 30,
               ),
-              child: TasksList(
-                task: task,
-              ),
+              child: TasksList(),
               width: double.infinity,
               height: double.minPositive,
               decoration: const BoxDecoration(

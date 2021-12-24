@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todoey_list/module/task.dart';
+import 'package:todoey_list/module/basic_task.dart';
+import 'package:todoey_list/task_data.dart';
+import 'package:provider/provider.dart';
 
 class AddTaskScreen extends StatelessWidget {
   late final Function func;
@@ -49,7 +51,7 @@ class AddTaskScreen extends StatelessWidget {
               color: Colors.lightBlueAccent,
               child: TextButton(
                 onPressed: () {
-                  func(newToDo);
+                  Provider.of<TaskData>(context).add(Task(name: newToDo));
                 },
                 child: const Text(
                   'Add Task',
