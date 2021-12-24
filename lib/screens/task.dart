@@ -5,16 +5,7 @@ import 'package:todoey_list/screens/add_task_screen.dart';
 import 'package:todoey_list/module/basic_task.dart';
 import 'package:provider/provider.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  late String value;
-
-  late TextEditingController controller;
-
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,18 +13,7 @@ class _TasksScreenState extends State<TasksScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (BuildContext context) => AddTaskScreen(
-              func: (newTaskTitle) {
-                setState(
-                  () {
-                    Provider.of<TaskData>(context)
-                        .task
-                        .add(Task(name: newTaskTitle));
-                  },
-                );
-                Navigator.pop(context);
-              },
-            ),
+            builder: (context) => AddTaskScreen(),
           );
         },
         backgroundColor: Colors.lightBlueAccent,

@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_list/task_data.dart';
 
 class TaskTile extends StatelessWidget {
   late final bool isChecked;
   late final String title;
   late final Function(bool?) func;
-  TaskTile({required this.title, required this.isChecked, required this.func});
+  late final Function()? func2;
+  TaskTile(
+      {required this.title,
+      required this.isChecked,
+      required this.func,
+      required this.func2});
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -22,6 +29,7 @@ class TaskTile extends StatelessWidget {
         checkColor: Colors.white,
         onChanged: func,
       ),
+      onLongPress: func2,
     );
   }
 }

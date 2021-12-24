@@ -4,8 +4,6 @@ import 'package:todoey_list/task_data.dart';
 import 'package:provider/provider.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  late final Function func;
-  AddTaskScreen({required this.func});
   late String newToDo;
   @override
   Widget build(BuildContext context) {
@@ -51,7 +49,9 @@ class AddTaskScreen extends StatelessWidget {
               color: Colors.lightBlueAccent,
               child: TextButton(
                 onPressed: () {
-                  Provider.of<TaskData>(context).add(Task(name: newToDo));
+                  Provider.of<TaskData>(context, listen: false)
+                      .addTask(Task(name: newToDo));
+                  Navigator.pop(context);
                 },
                 child: const Text(
                   'Add Task',

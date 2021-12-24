@@ -9,8 +9,18 @@ class TaskData extends ChangeNotifier {
     return task.length;
   }
 
-  void add(Task k) {
+  void addTask(Task k) {
     task.add(k);
+    notifyListeners();
+  }
+
+  void update(int k) {
+    task[k].isDone = !task[k].isDone;
+    notifyListeners();
+  }
+
+  void erase(int k) {
+    task.remove(task[k]);
     notifyListeners();
   }
 }
