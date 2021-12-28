@@ -1,6 +1,6 @@
 # todoey_list
 
-A new Flutter project.
+![Simulator Screen Recording - iPhone 13 Pro Max - 2021-12-26 at 15 33 05](https://user-images.githubusercontent.com/60975809/147404910-7af5253f-8771-475f-9647-75cda6a70d2b.gif)
 
 ## Getting Started
 
