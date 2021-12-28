@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_list/widgets/task_tile.dart';
-import 'package:todoey_list/module/basic_task.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey_list/task_data.dart';
 
